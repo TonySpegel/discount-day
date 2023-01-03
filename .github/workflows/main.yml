@@ -6,9 +6,6 @@ name: Build & Deploy
 jobs:
   build-deploy-app:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./
     steps:
       # Check-out repository under $GITHUB_WORKSPACE
       - name: Checkout
