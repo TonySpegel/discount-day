@@ -13,7 +13,6 @@ jobs:
       # Check-out repository under $GITHUB_WORKSPACE
       - name: Checkout
         uses: actions/checkout@v2
-      - run: ls -lh
       # Install NPM dependencies & build
       - name: Build 🏗️
         uses: actions/setup-node@v2
@@ -22,7 +21,6 @@ jobs:
       - run: |
           npm install
           npm run build -- --base=${{ github.event.repository.name }}
-          ls -lh
       # Deploy to GitHub Pages
       - name: Deploy 🚀
         # Deploys to gh-pages by default
