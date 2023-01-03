@@ -6,6 +6,9 @@ name: Build & Deploy
 jobs:
   build-deploy-app:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./app/discount-day/
     steps:
       # Check-out repository under $GITHUB_WORKSPACE
       - name: Checkout
@@ -17,7 +20,7 @@ jobs:
           node-version: 18
       - run: |
           npm install
-          npm run build
+          npm run build -- --base=${{ github.event.repository.name }}
       # Deploy to GitHub Pages
       - name: Deploy 🚀
         # Deploys to gh-pages by default
