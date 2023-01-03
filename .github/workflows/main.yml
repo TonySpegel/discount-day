@@ -28,7 +28,7 @@ jobs:
         # Deploys to gh-pages by default
         uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
-          folder: dist # The folder the action should deploy.
+          folder: ./app/discount-day/ # The folder the action should deploy.
       - name: List files in the repository
         run: |
           ls -lR | more ${{ github.workspace }}/dist
