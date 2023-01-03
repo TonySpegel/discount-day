@@ -22,6 +22,7 @@ jobs:
       - run: |
           npm install
           npm run build -- --base=${{ github.event.repository.name }}
+          ls -lh
       # Deploy to GitHub Pages
       - name: Deploy 🚀
         # Deploys to gh-pages by default
