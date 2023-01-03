@@ -29,11 +29,15 @@ export const getDish = (request: Request, response: Response) => {
   const day = request.params.day || currentDay();
   console.log(day);
 
-  pool.query<BusinessDish>(dayQuery(day), [], (error: any, results: { rows: any }) => {
-    if (error) {
-      throw error;
-    }
+  pool.query<BusinessDish>(
+    dayQuery(day),
+    [],
+    (error: any, results: { rows: BusinessDish[] }) => {
+      if (error) {
+        return console.error('Error executing query', error.stack)
+      }
 
-    response.status(200).json(results.rows);
-  });
+      response.status(200).json(results.rows);
+    }
+  );
 };
