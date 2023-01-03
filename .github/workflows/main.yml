@@ -1,0 +1,32 @@
+on: 
+  push:
+    branches:
+      - main
+name: Build & Deploy
+jobs:
+  build-deploy-app:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./app
+    steps:
+      # Check-out repository under $GITHUB_WORKSPACE
+      - name: Checkout
+        uses: actions/checkout@v2
+      # Install NPM dependencies & build
+      - name: Build 🏗️
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+      - run: |
+          npm install
+          npm run build
+      # Deploy to GitHub Pages
+      - name: Deploy 🚀
+        # Deploys to gh-pages by default
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
+        with:
+          folder: dist # The folder the action should deploy.
+      - name: List files in the repository
+        run: |
+          ls -lR | more ${{ github.workspace }}/dist
