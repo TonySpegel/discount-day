@@ -13,6 +13,7 @@ jobs:
       # Check-out repository under $GITHUB_WORKSPACE
       - name: Checkout
         uses: actions/checkout@v2
+      - run: ls -lh
       # Install NPM dependencies & build
       - name: Build 🏗️
         uses: actions/setup-node@v2
