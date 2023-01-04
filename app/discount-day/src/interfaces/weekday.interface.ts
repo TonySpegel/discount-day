@@ -2,10 +2,11 @@
  * Copyright © 2022/2023 Tony Spegel
  */
 
-import { weekDay } from '../types/';
+
+import { WeekDayType } from '../../../../shared/types/weekday.type';
 
 export interface WeekDayInterface {
-  name: weekDay;
+  name: WeekDayType;
   today: boolean;
   weekIndex: number;
 }
