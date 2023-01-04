@@ -17,7 +17,8 @@ app.use(cors(options));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get<BusinessDish>('/day', getDish);
+app.get<BusinessDish>('/day', getDish); // current day
+app.get<BusinessDish>('/day/:weekDay', getDish); // /day/friday
 
 app.listen(port, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
