@@ -7,7 +7,7 @@ import { customElement, state } from 'lit/decorators.js';
 import { map } from 'lit/directives/map.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { WeekDayInterface } from '../interfaces/';
-import { ActiveDayEvent } from '../events/';
+import { ActiveDayEvent } from '../events/active-day.event';
 
 @customElement('app-day-selection')
 export class AppDaySelection extends LitElement {
