@@ -27,6 +27,7 @@ const dayQuery = (day: string): string => `
   FROM business
   INNER JOIN dish
   ON dish.dish_id = business.discount_dish_${day}
+  ORDER BY dish_name, business.name
 `;
 
 export const getDish = (request: Request, response: Response) => {
