@@ -17,14 +17,16 @@ export class AppDiscount extends LitElement {
     return [
       styles,
       css`
+        :host {
+          --base-gap: 16px;
+        }
+
         ul {
           list-style-type: none;
           padding: 0;
-        }
-
-        li {
-          border: 2px solid lightblue;
-          margin-bottom: 20px;
+          display: flex;
+          gap: var(--base-gap);
+          flex-direction: column;
         }
       `,
     ];
@@ -34,7 +36,7 @@ export class AppDiscount extends LitElement {
     this,
     () =>
       get<NameDishInterface[]>(
-        `http://localhost:3000/day/${this.state.weekDay}`
+        `http://rhea.lan:3000/day/${this.state.weekDay}`
       ),
     () => [this.state.weekDay]
   );
@@ -45,7 +47,6 @@ export class AppDiscount extends LitElement {
     return html`
       <app-header></app-header>
       <main>
-        Tag: ${this.state.weekDay}
         ${this._apiTask.render({
           pending: () => html`<sl-spinner></sl-spinner>`,
           error: () => html`error`,
