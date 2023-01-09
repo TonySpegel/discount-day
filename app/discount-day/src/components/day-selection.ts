@@ -6,18 +6,44 @@ import { css, html, LitElement } from 'lit';
 import { customElement, state } from 'lit/decorators.js';
 import { map } from 'lit/directives/map.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { WeekDayInterface } from '../interfaces/';
-import { WeekDayType } from '../../../../shared/types/weekday.type';
-import { weekDayState } from '../states/week-day.state';
 import { use } from 'lit-shared-state';
+
+import { currentDay } from '../../../../shared/helper/currentDay.js';
+import { WeekDayType } from '../../../../shared/types/weekday.type';
+import { WeekDayInterface } from '../interfaces/';
+import { weekDayState } from '../states/week-day.state';
 
 @customElement('app-day-selection')
 export class AppDaySelection extends LitElement {
   static get styles() {
     return [
       css`
+        ol {
+          display: grid;
+          gap: 8px;
+          grid-template-columns: repeat(3, 1fr);
+
+          padding: 0;
+          
+          list-style-type: none;
+          text-transform: capitalize;
+        }
+
+        .day {
+          display: inline-block;
+          box-sizing: border-box;
+
+          border-radius: 8px;
+          border: 1px solid var(--sl-color-purple-800);
+          padding: 8px 16px;
+          width: 100%;
+
+          text-align: center;
+        }
+
         .selected {
-          color: red;
+          background-color: var(--sl-color-purple-800);
+          color: white;
         }
       `,
     ];
@@ -61,23 +87,34 @@ export class AppDaySelection extends LitElement {
     history.pushState(null, '', newRelativePathQuery);
   };
 
+  /**
+   * Update the selected day in:
+   * WeekDayState (shared), <day-selection>, URL-param 'day'
+   */
+  private _updateDay = (day: WeekDayType): void => {
+    this.WeekDayState.weekDay = day;
+    this._selectDay(day);
+    this._updateUrlParam(day);
+  };
+
   render() {
-    return html`<ul>
-      ${map(
-        this.weekDays,
-        (weekday, _index) => html`
-          <li
-            @click=${() => {
-              this.WeekDayState.weekDay = weekday.name;
-              this._selectDay(weekday.name);
-              this._updateUrlParam(weekday.name);
-            }}
-            class=${classMap({ selected: weekday.selected })}
-          >
-            ${weekday.name}
-          </li>
-        `
-      )}
-    </ul>`;
+    return html`
+      <span>Select a day</span>
+      <ol>
+        ${map(
+          this.weekDays,
+          (weekday) => html`
+            <li>
+              <a
+                @click=${() => this._updateDay(weekday.name)}
+                class="day ${classMap({ selected: weekday.selected })}"
+                >${weekday.name}</a
+              >
+            </li>
+          `
+        )}
+      </ol>
+      <span @click=${() => this._updateDay(currentDay())}>today</span>
+    `;
   }
 }
