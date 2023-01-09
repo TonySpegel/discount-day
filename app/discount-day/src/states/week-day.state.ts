@@ -18,4 +18,4 @@ class WeekDayState {
       : currentDay();
 }
 
-export const weekDayState = new WeekDayState();
+export const dayState = new WeekDayState();

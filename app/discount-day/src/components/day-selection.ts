@@ -11,7 +11,7 @@ import { use } from 'lit-shared-state';
 import { currentDay } from '../../../../shared/helper/currentDay.js';
 import { WeekDayType } from '../../../../shared/types/weekday.type';
 import { WeekDayInterface } from '../interfaces/';
-import { weekDayState } from '../states/week-day.state';
+import { dayState } from '../states/week-day.state';
 
 @customElement('app-day-selection')
 export class AppDaySelection extends LitElement {
@@ -24,7 +24,7 @@ export class AppDaySelection extends LitElement {
           grid-template-columns: repeat(3, 1fr);
 
           padding: 0;
-          
+
           list-style-type: none;
           text-transform: capitalize;
         }
@@ -49,7 +49,7 @@ export class AppDaySelection extends LitElement {
     ];
   }
 
-  @use() WeekDayState = weekDayState;
+  @use() day = dayState;
 
   @state()
   private weekDays: WeekDayInterface[] = [
@@ -64,7 +64,7 @@ export class AppDaySelection extends LitElement {
 
   constructor() {
     super();
-    this._selectDay(this.WeekDayState.weekDay);
+    this._selectDay(this.day.weekDay);
   }
 
   private _selectDay = (day: WeekDayType): void => {
@@ -92,7 +92,7 @@ export class AppDaySelection extends LitElement {
    * WeekDayState (shared), <day-selection>, URL-param 'day'
    */
   private _updateDay = (day: WeekDayType): void => {
-    this.WeekDayState.weekDay = day;
+    this.day.weekDay = day;
     this._selectDay(day);
     this._updateUrlParam(day);
   };
