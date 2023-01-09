@@ -6,6 +6,7 @@ import './pages/app-home';
 import './pages/app-discount';
 import './components/header';
 import './components/day-selection';
+import './components/discount-card';
 import './styles/global.css';
 
 @customElement('app-index')
