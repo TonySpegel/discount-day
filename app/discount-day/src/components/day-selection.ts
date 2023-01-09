@@ -7,49 +7,59 @@ import { customElement, state } from 'lit/decorators.js';
 import { map } from 'lit/directives/map.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { WeekDayInterface } from '../interfaces/';
-import { ActiveDayEvent } from '../events/active-day.event';
+import { WeekDayType } from '../../../../shared/types/weekday.type';
+import { weekDayState } from '../states/week-day.state';
+import { use } from 'lit-shared-state';
 
 @customElement('app-day-selection')
 export class AppDaySelection extends LitElement {
   static get styles() {
     return [
       css`
-        .today {
+        .selected {
           color: red;
         }
       `,
     ];
   }
 
-  @state()
-  private todayWeekIndex = new Date(Date.now()).getDay();
+  @use() WeekDayState = weekDayState;
 
   @state()
   private weekDays: WeekDayInterface[] = [
-    { name: 'monday', today: true, weekIndex: 1 },
-    { name: 'tuesday', today: false, weekIndex: 2 },
-    { name: 'wednesday', today: false, weekIndex: 3 },
-    { name: 'thursday', today: false, weekIndex: 4 },
-    { name: 'friday', today: false, weekIndex: 5 },
-    { name: 'saturday', today: false, weekIndex: 6 },
-    { name: 'sunday', today: false, weekIndex: 0 },
+    { name: 'monday', selected: false, weekIndex: 1 },
+    { name: 'tuesday', selected: false, weekIndex: 2 },
+    { name: 'wednesday', selected: false, weekIndex: 3 },
+    { name: 'thursday', selected: false, weekIndex: 4 },
+    { name: 'friday', selected: false, weekIndex: 5 },
+    { name: 'saturday', selected: false, weekIndex: 6 },
+    { name: 'sunday', selected: false, weekIndex: 0 },
   ];
-
-  private _setActiveDay(weekIndex: number): void {
-    this.weekDays = this.weekDays.map((weekDay) => {
-      if (weekDay.weekIndex === weekIndex) {
-        return { ...weekDay, today: true };
-      }
-
-      // Reset today state
-      return { ...weekDay, today: false };
-    });
-  }
 
   constructor() {
     super();
-    this._setActiveDay(this.todayWeekIndex);
+    this._selectDay(this.WeekDayState.weekDay);
   }
+
+  private _selectDay = (day: WeekDayType): void => {
+    this.weekDays = this.weekDays.map((weekDay) => {
+      if (weekDay.name === day) {
+        return { ...weekDay, selected: true };
+      }
+
+      return { ...weekDay, selected: false };
+    });
+  };
+
+  private _updateUrlParam = (day: WeekDayType): void => {
+    const searchParams = new URLSearchParams(window.location.search);
+    searchParams.set('day', day);
+
+    const newRelativePathQuery = `${
+      window.location.pathname
+    }?${searchParams.toString()}`;
+    history.pushState(null, '', newRelativePathQuery);
+  };
 
   render() {
     return html`<ul>
@@ -58,10 +68,11 @@ export class AppDaySelection extends LitElement {
         (weekday, _index) => html`
           <li
             @click=${() => {
-              this._setActiveDay(weekday.weekIndex);
-              window.dispatchEvent(new ActiveDayEvent(weekday.name));
+              this.WeekDayState.weekDay = weekday.name;
+              this._selectDay(weekday.name);
+              this._updateUrlParam(weekday.name);
             }}
-            class=${classMap({ today: weekday.today })}
+            class=${classMap({ selected: weekday.selected })}
           >
             ${weekday.name}
           </li>
@@ -70,4 +81,3 @@ export class AppDaySelection extends LitElement {
     </ul>`;
   }
 }
-

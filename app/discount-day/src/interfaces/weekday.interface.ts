@@ -7,6 +7,6 @@ import { WeekDayType } from '../../../../shared/types/weekday.type';
 
 export interface WeekDayInterface {
   name: WeekDayType;
-  today: boolean;
+  selected: boolean;
   weekIndex: number;
 }

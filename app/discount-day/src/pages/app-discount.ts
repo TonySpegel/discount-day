@@ -2,77 +2,70 @@
  * Copyright © 2022/2023 Tony Spegel
  */
 
-import { ActiveDayEvent } from '../events/active-day.event.js';
 import { NameDishInterface } from '../interfaces/name-dish.interface';
 import { Task } from '@lit-labs/task';
 import { css, html, LitElement } from 'lit';
-import { customElement, state } from 'lit/decorators.js';
+import { customElement } from 'lit/decorators.js';
 import { get } from '../helper/fetch.js';
-import { parseUrlParam } from '../helper/parse-url.js';
 import { styles } from '../styles/shared-styles';
-import { WeekDayType } from '../../../../shared/types/weekday.type';
-import { currentDay } from '../../../../shared/helper/currentDay.js';
-import { isWeekDay } from '../../../../shared/helper/isWeekDay.js';
-
+import { weekDayState } from '../states/week-day.state';
+import { use } from 'lit-shared-state';
 
 @customElement('app-discount')
 export class AppDiscount extends LitElement {
-  @state()
-  private day: WeekDayType;
-
-  private _apiTask = new Task(
-    this,
-    () => get<NameDishInterface[]>(`http://localhost:3000/day/${this.day}`),
-    () => [this.day]
-  );
-
   static get styles() {
     return [
       styles,
       css`
-        td {
-          border: 1px solid;
+        ul {
+          list-style-type: none;
+          padding: 0;
+        }
+
+        li {
+          border: 2px solid lightblue;
+          margin-bottom: 20px;
         }
       `,
     ];
   }
 
-  constructor() {
-    super();
+  private _apiTask = new Task(
+    this,
+    () =>
+      get<NameDishInterface[]>(
+        `http://localhost:3000/day/${this.state.weekDay}`
+      ),
+    () => [this.state.weekDay]
+  );
 
-    window.addEventListener(ActiveDayEvent.eventName, (e) => {
-      this.day = (e as ActiveDayEvent).activeDay;
-      console.log(this.day);
-    });
-
-    const urlDayParam = parseUrlParam<WeekDayType>('day');
-    // When the day param is defined and its value is a valid day use this one, if not use the current day
-    this.day =
-      urlDayParam && isWeekDay(urlDayParam) ? urlDayParam : currentDay();
-  }
+  @use() state = weekDayState;
 
   render() {
     return html`
       <app-header></app-header>
       <main>
-        Tag: ${this.day}
+        Tag: ${this.state.weekDay}
         ${this._apiTask.render({
           pending: () => html`<sl-spinner></sl-spinner>`,
           error: () => html`error`,
           complete: (discounts: NameDishInterface[]) =>
-            html`<table>
+            html`<ul>
               ${discounts.map(
                 (discount) =>
-                  html`<tr>
-                    <td>${discount.name}</td>
-                    <td>${discount.dish_name}</td>
-                  </tr>`
+                  html`
+                    <li>
+                      <app-discount-card
+                        store=${discount.name}
+                        discountName=${discount.dish_name}
+                      ></app-discount-card>
+                    </li>
+                  `
               )}
-            </table>`,
+            </ul>`,
         })}
         <app-day-selection></app-day-selection>
       </main>
     `;
   }
 }
-
