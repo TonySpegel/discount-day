@@ -22,11 +22,11 @@ export class AppDiscount extends LitElement {
         }
 
         ul {
-          list-style-type: none;
-          padding: 0;
           display: flex;
-          gap: var(--base-gap);
           flex-direction: column;
+          gap: var(--base-gap);
+          padding: 0;
+          list-style-type: none;
         }
       `,
     ];
