@@ -11,7 +11,7 @@ import { use } from 'lit-shared-state';
 import { currentDay } from '../../../../shared/helper/currentDay.js';
 import { WeekDayType } from '../../../../shared/types/weekday.type';
 import { WeekDayInterface } from '../interfaces/';
-import { dayState } from '../states/week-day.state';
+import { dayState, WeekDayState } from '../states/week-day.state';
 
 @customElement('app-day-selection')
 export class AppDaySelection extends LitElement {
@@ -49,7 +49,7 @@ export class AppDaySelection extends LitElement {
     ];
   }
 
-  @use() day = dayState;
+  @use() day: WeekDayState = dayState;
 
   @state()
   private weekDays: WeekDayInterface[] = [

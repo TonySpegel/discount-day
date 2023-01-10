@@ -9,7 +9,7 @@ import { parseUrlParam } from '../helper/parse-url.js';
 import { state } from 'lit-shared-state';
 
 @state()
-class WeekDayState {
+export class WeekDayState {
   public urlDayParam = parseUrlParam<WeekDayType>('day');
 
   public weekDay: WeekDayType =

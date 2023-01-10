@@ -8,7 +8,7 @@ import { css, html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { get } from '../helper/fetch.js';
 import { styles } from '../styles/shared-styles';
-import { dayState } from '../states/week-day.state';
+import { dayState, WeekDayState } from '../states/week-day.state';
 import { use } from 'lit-shared-state';
 
 @customElement('app-discount')
@@ -41,7 +41,7 @@ export class AppDiscount extends LitElement {
     () => [this.state.weekDay]
   );
 
-  @use() state = dayState;
+  @use() state: WeekDayState = dayState;
 
   render() {
     return html`
