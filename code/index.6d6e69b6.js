@@ -1080,11 +1080,11 @@ found at http://polymer.github.io/PATENTS.txt
         }
 
         ul {
-          list-style-type: none;
-          padding: 0;
           display: flex;
-          gap: var(--base-gap);
           flex-direction: column;
+          gap: var(--base-gap);
+          padding: 0;
+          list-style-type: none;
         }
       `]}render(){return P`
       <app-header></app-header>
@@ -1276,11 +1276,11 @@ found at http://polymer.github.io/PATENTS.txt
           opacity: 1;
         }
       }
-    `}constructor(){super()}firstUpdated(){var t;new z((t=this.shadowRoot)==null?void 0:t.querySelector("#routerOutlet")).setRoutes([{path:"/discount-day/",animate:!0,children:[{path:"",component:"app-discount"},{path:"discount",component:"app-discount",action:async()=>{await Ge(()=>Promise.resolve().then(function(){return Ps}),void 0)}},{path:"about",component:"app-about",action:async()=>{await Ge(()=>import("./app-about.18a69c0d.js"),[])}}]}])}render(){return P`
+    `}constructor(){super()}firstUpdated(){var t;new z((t=this.shadowRoot)==null?void 0:t.querySelector("#routerOutlet")).setRoutes([{path:"/discount-day/",animate:!0,children:[{path:"",component:"app-discount"},{path:"discount",component:"app-discount",action:async()=>{await Ge(()=>Promise.resolve().then(function(){return Ps}),void 0)}},{path:"about",component:"app-about",action:async()=>{await Ge(()=>import("./app-about.56707b11.js"),[])}}]}])}render(){return P`
       <div>
         <main>
           <div id="routerOutlet"></div>
         </main>
       </div>
     `}};Xr=zs([ct("app-index")],Xr);export{zn as a,ct as e,G as i,U as s,P as y};
-//# sourceMappingURL=index.5473ad6e.js.map
+//# sourceMappingURL=index.6d6e69b6.js.map
