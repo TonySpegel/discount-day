@@ -24,15 +24,19 @@ const dayQueryNew = (day: string): string => `
   SELECT
       business_2.name AS business,
       business_2.coordinates AS coords,
-      category.name as category,
-      discount_list.price AS price
-  FROM discount_week AS dw
+      category.name AS category,
+      discount_list.name AS name,
+      discount_list.price AS price,
+      discount_list.discount_id AS ID
+  FROM business_weekday_discount AS bwd
       INNER JOIN business_2
-      ON business_2.business_id = dw.business_id
+      ON business_2.business_id = bwd.business_id
       INNER JOIN discount_list
-      ON discount_list.discount_id = dw.discount_${day}
-      INNER JOIN category
+      ON discount_list.discount_id = bwd.discount_id
+    INNER JOIN category
       ON discount_list.category_id = category.category_id
+  WHERE bwd.week_day = '${day}'
+  ORDER BY price
 `;
 
 export const getDishNew = (request: Request, response: Response) => {
