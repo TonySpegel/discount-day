@@ -13,6 +13,10 @@ import { WeekDayType } from '../../../../shared/types/weekday.type';
 import { WeekDayInterface } from '../interfaces/';
 import { dayState, WeekDayState } from '../states/week-day.state';
 
+import '@shoelace-style/shoelace/dist/components/dropdown/dropdown.js';
+import '@shoelace-style/shoelace/dist/components/menu/menu.js';
+import '@shoelace-style/shoelace/dist/components/menu-item/menu-item.js';
+
 @customElement('app-day-selection')
 export class AppDaySelection extends LitElement {
   static get styles() {
@@ -99,22 +103,43 @@ export class AppDaySelection extends LitElement {
 
   render() {
     return html`
-      <span>Select a day</span>
-      <ol>
-        ${map(
-          this.weekDays,
-          (weekday) => html`
-            <li>
-              <a
+      <sl-dropdown>
+        <sl-button slot="trigger" caret>Select a day</sl-button>
+        <sl-menu>
+          ${map(
+            this.weekDays,
+            (weekday) => html`
+              <sl-menu-item
                 @click=${() => this._updateDay(weekday.name)}
-                class="day ${classMap({ selected: weekday.selected })}"
-                >${weekday.name}</a
+                class="${classMap({ selected: weekday.selected })}"
+                value=${weekday.name}
+                >${weekday.name}</sl-menu-item
               >
-            </li>
-          `
-        )}
-      </ol>
+            `
+          )}
+        </sl-menu>
+      </sl-dropdown>
+
+      <span>or </span>
       <span @click=${() => this._updateDay(currentDay())}>today</span>
     `;
   }
 }
+
+/**
+ * 
+<ol>
+  ${map(
+    this.weekDays,
+    (weekday) => html`
+      <li>
+        <a
+          @click=${() => this._updateDay(weekday.name)}
+          class="day ${classMap({ selected: weekday.selected })}"
+          >${weekday.name}</a
+        >
+      </li>
+    `
+  )}
+</ol>
+ */
