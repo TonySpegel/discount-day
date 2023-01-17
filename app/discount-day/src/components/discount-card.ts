@@ -4,6 +4,7 @@
 
 import { css, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { when } from 'lit/directives/when.js';
 
 @customElement('app-discount-card')
 export class AppDiscountCard extends LitElement {
@@ -18,29 +19,40 @@ export class AppDiscountCard extends LitElement {
           display: grid;
           grid-template-areas:
             'symbol . . price'
-            'store . .  price';
+            'business . .  price';
         }
 
-        data {
+        #price {
           grid-area: price;
+          align-self: center;
           justify-self: flex-end;
         }
 
-        .store {
-          grid-area: store;
+        .name-category {
+          text-transform: capitalize;
+        }
+
+        .business {
+          grid-area: business;
         }
       `,
     ];
   }
 
   @property({ type: String })
-  store = '';
+  business = '';
+
+  @property({ type: String })
+  category = '';
 
   @property({ type: String })
   discountName = '';
 
   @property({ type: Number })
   price: number = 4.9;
+
+  // @property({ type: Object })
+  // coords: { x: number; y: number } = { x: 0, y: 0 };
 
   private formatPrice = (price: number) =>
     new Intl.NumberFormat('de-DE', {
@@ -51,9 +63,18 @@ export class AppDiscountCard extends LitElement {
   render() {
     return html`
       <div class="discount-card">
-        ${this.discountName}
-        <span class="store">${this.store}</span>
-        <data value=${this.price}>${this.formatPrice(this.price)}</data>
+        <span class="name-category">
+          ${when(
+            this.discountName,
+            () => html`${this.discountName}`,
+            () => html`${this.category}`
+          )}
+        </span>
+
+        <span class="business">${this.business}</span>
+        <data id="price" value=${this.price}
+          >${this.formatPrice(this.price)}</data
+        >
       </div>
     `;
   }
