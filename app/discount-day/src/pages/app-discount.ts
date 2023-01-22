@@ -33,8 +33,8 @@ export class AppDiscount extends LitElement {
 
         #version {
           position: fixed;
-          bottom: 16px;
-          left: 16px;
+          bottom: 32px;
+          left: 32px;
         }
       `,
     ];
