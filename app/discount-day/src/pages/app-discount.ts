@@ -6,6 +6,7 @@ import { Task } from '@lit-labs/task';
 import { css, html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { use } from 'lit-shared-state';
+import { version } from '../../package.json';
 
 import { DiscountCardInterface } from '../../../../shared/interfaces/discount-card.interface';
 import { dayState, WeekDayState } from '../states/week-day.state';
@@ -28,6 +29,12 @@ export class AppDiscount extends LitElement {
           gap: var(--base-gap);
           padding: 0;
           list-style-type: none;
+        }
+
+        #version {
+          position: fixed;
+          bottom: 16px;
+          left: 16px;
         }
       `,
     ];
@@ -69,6 +76,7 @@ export class AppDiscount extends LitElement {
             </ul>`,
         })}
         <app-day-selection></app-day-selection>
+        <span id="version">${version}</span>
       </main>
     `;
   }
