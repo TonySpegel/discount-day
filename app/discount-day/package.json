@@ -1,7 +1,7 @@
 {
   "name": "discount-day",
-  "version": "0.0.2",
-  "description": "A starter kit for building PWAs!",
+  "version": "0.0.20",
+  "description": "Find fast food deals in Jena",
   "main": "index.js",
   "scripts": {
     "dev-server": "vite --open",
