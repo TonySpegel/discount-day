@@ -6,12 +6,12 @@ import dotenv from 'dotenv';
 import path from 'path';
 import pg from 'pg';
 import { Request, Response } from 'express';
+import { fileURLToPath } from 'url';
 
-import { DiscountCardInterface } from '../interfaces/business.interface';
-import { WeekDayType } from '../types/weekday.type.js';
+import { DiscountCardInterface } from '../../../shared/interfaces/discount-card.interface';
+import { WeekDayType } from '../../../shared/types/weekday.type.js';
 import { currentDay } from '../helper/currentDay.js';
 import { isWeekDay } from '../helper/isWeekDay.js';
-import { fileURLToPath } from 'url';
 
 const { Pool } = pg;
 const __filename = fileURLToPath(import.meta.url);

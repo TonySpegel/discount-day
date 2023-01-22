@@ -21,4 +21,5 @@ export interface DiscountCardInterface {
   category: DiscountCategoryType;
   name: string;
   price: number;
+  id?: string;
 }

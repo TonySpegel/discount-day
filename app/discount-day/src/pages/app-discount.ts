@@ -7,7 +7,7 @@ import { css, html, LitElement } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { use } from 'lit-shared-state';
 
-import { DiscountCardInterface } from '../interfaces/discount-card.interface';
+import { DiscountCardInterface } from '../../../../shared/interfaces/discount-card.interface';
 import { dayState, WeekDayState } from '../states/week-day.state';
 import { get } from '../helper/fetch.js';
 import { styles } from '../styles/shared-styles';
@@ -37,7 +37,7 @@ export class AppDiscount extends LitElement {
     this,
     () =>
       get<DiscountCardInterface[]>(
-        `http://rhea.lan:3000/day/${this.state.weekDay}`
+        `http://localhost:3000/day/${this.state.weekDay}`
       ),
     () => [this.state.weekDay]
   );
