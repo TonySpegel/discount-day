@@ -1,6 +1,6 @@
 {
   "name": "discount-day",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "Find fast food deals in Jena",
   "main": "index.js",
   "scripts": {
