@@ -1,6 +1,6 @@
 {
-  "name": "pwa-starter",
-  "version": "0.0.1",
+  "name": "discount-day",
+  "version": "0.0.2",
   "description": "A starter kit for building PWAs!",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
   "dependencies": {
     "@lit-labs/task": "^2.0.0",
     "@pwabuilder/pwainstall": "^1.6.7",
-    "@shoelace-style/shoelace": "^2.0.0-beta.82",
+    "@shoelace-style/shoelace": "^2.0.0-beta.88",
     "@vaadin/router": "^1.7.4",
     "lit": "^2.5.0",
     "lit-shared-state": "^0.1.3",
