@@ -19,6 +19,7 @@ jobs:
         with:
           node-version: 18
       - run: |
+          echo "${{secrets.WEBSITE_ENV_STAGE }}" > .env.production
           npm install
           npm run build -- --base=${{ github.event.repository.name }}
       # Deploy to GitHub Pages
