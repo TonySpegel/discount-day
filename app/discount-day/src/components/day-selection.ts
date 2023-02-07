@@ -13,9 +13,10 @@ import { WeekDayType } from '../../../../shared/types/weekday.type';
 import { WeekDayInterface } from '../interfaces/';
 import { dayState, WeekDayState } from '../states/week-day.state';
 
+import '@shoelace-style/shoelace/dist/components/drawer/drawer.js';
 import '@shoelace-style/shoelace/dist/components/dropdown/dropdown.js';
-import '@shoelace-style/shoelace/dist/components/menu/menu.js';
 import '@shoelace-style/shoelace/dist/components/menu-item/menu-item.js';
+import '@shoelace-style/shoelace/dist/components/menu/menu.js';
 
 @customElement('app-day-selection')
 export class AppDaySelection extends LitElement {
@@ -49,6 +50,11 @@ export class AppDaySelection extends LitElement {
           background-color: var(--sl-color-purple-800);
           color: white;
         }
+
+        sl-drawer::part(panel) {
+          border-top-left-radius: 16px;
+          border-top-right-radius: 16px;
+        }
       `,
     ];
   }
@@ -65,6 +71,9 @@ export class AppDaySelection extends LitElement {
     { name: 'saturday', selected: false, weekIndex: 6 },
     { name: 'sunday', selected: false, weekIndex: 0 },
   ];
+
+  @state()
+  isOpen = false;
 
   constructor() {
     super();
@@ -103,25 +112,33 @@ export class AppDaySelection extends LitElement {
 
   render() {
     return html`
-      <sl-dropdown>
-        <sl-button slot="trigger" caret>Select a day</sl-button>
-        <sl-menu>
-          ${map(
-            this.weekDays,
-            (weekday) => html`
-              <sl-menu-item
-                @click=${() => this._updateDay(weekday.name)}
-                class="${classMap({ selected: weekday.selected })}"
-                value=${weekday.name}
-                >${weekday.name}</sl-menu-item
-              >
-            `
-          )}
-        </sl-menu>
-      </sl-dropdown>
-
       <span>or </span>
       <span @click=${() => this._updateDay(currentDay())}>today</span>
+
+      <sl-drawer ?open=${this.isOpen} label="Drawer" placement="bottom">
+        <sl-dropdown>
+          <sl-button slot="trigger" caret>Select a day</sl-button>
+          <sl-menu>
+            ${map(
+              this.weekDays,
+              (weekday) => html`
+                <sl-menu-item
+                  @click=${() => this._updateDay(weekday.name)}
+                  class="${classMap({ selected: weekday.selected })}"
+                  value=${weekday.name}
+                  >${weekday.name}</sl-menu-item
+                >
+              `
+            )}
+          </sl-menu>
+        </sl-dropdown>
+
+        <sl-button slot="footer" variant="primary">Close</sl-button>
+      </sl-drawer>
+
+      <sl-button @click=${() => (this.isOpen = !this.isOpen)}
+        >Filter
+      </sl-button>
     `;
   }
 }
