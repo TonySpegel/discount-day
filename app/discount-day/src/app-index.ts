@@ -84,6 +84,13 @@ export class AppIndex extends LitElement {
               await import('./pages/app-about/app-about.js');
             },
           },
+          {
+            path: 'stats',
+            component: 'app-stats',
+            action: async () => {
+              await import('./pages/app-stats.js');
+            },
+          },
         ],
       } as any,
     ]);
