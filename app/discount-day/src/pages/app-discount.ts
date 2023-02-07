@@ -51,6 +51,12 @@ export class AppDiscount extends LitElement {
 
   @use() state: WeekDayState = dayState;
 
+  constructor() {
+    super();
+    const endPoint = import.meta.env.VITE_SCRR;
+    console.log({ endPoint });
+  }
+
   render() {
     return html`
       <app-header></app-header>
