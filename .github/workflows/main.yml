@@ -19,6 +19,7 @@ jobs:
         with:
           node-version: 18
       - run: |
+          echo "${{ github.event.repository.name }}"
           echo "${{secrets.WEBSITE_ENV_PRODUCTION }}" > .env.production
           ls -lR | more ./
           npm install
