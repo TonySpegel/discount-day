@@ -21,14 +21,13 @@ export class AppStats extends LitElement {
 
   render() {
     return html`
-      <app-header></app-header>
+      <h2>stats</h2>
       <main>
         ${this._apiTask.render({
           pending: () => html`<sl-spinner></sl-spinner>`,
           error: () => html`error`,
           complete: (response) => html`${response}`,
         })}
-        <app-day-selection></app-day-selection>
       </main>
     `;
   }
