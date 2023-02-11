@@ -20,9 +20,6 @@
   <meta name="apple-mobile-web-app-title" content="PWA Starter" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
 
-  <!-- Imports an icon to represent the document. -->
-  <link rel="icon" href="/assets/icons/icon_24.png" type="image/x-icon" />
-
   <!-- Imports the manifest to represent the web application. A web app must have a manifest to be a PWA. -->
   <link rel="manifest" href="/manifest.json" />
 
@@ -40,15 +37,16 @@
   <!-- Our app-index web component. This component is defined in src/pages/app-index.ts-->
   <app-index></app-index>
 
-  <script>
-    if ('serviceWorker' in navigator) {
-      console.log(import.meta.env.BASE_URL);
-      console.log(import.meta.env.VITE_SCRR);
-      navigator.serviceWorker.register(
-        '/sw.js'
-      );
-    }
-  </script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register(
+      '/discount-day/sw.js',
+      {
+        scope:'/discount-day/'
+      }
+    );
+  }
+</script>
 </body>
 
 </html>
