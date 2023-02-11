@@ -74,21 +74,21 @@ export class AppIndex extends LitElement {
         children: [
           { path: '', component: 'app-discount' },
           {
-            path: '/discount-day/discount',
+            path: 'discount',
             component: 'app-discount',
             action: async () => {
               await import('./pages/app-discount.js');
             },
           },
           {
-            path: '/discount-day/about',
+            path: 'about',
             component: 'app-about',
             action: async () => {
               await import('./pages/app-about/app-about.js');
             },
           },
           {
-            path: '/discount-day/stats',
+            path: 'stats',
             component: 'app-stats',
             action: async () => {
               await import('./pages/app-stats.js');
