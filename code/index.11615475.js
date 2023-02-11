@@ -2082,11 +2082,11 @@ lit-html/directives/unsafe-svg.js:
           opacity: 1;
         }
       }
-    `}constructor(){super()}firstUpdated(){var t;new gt((t=this.shadowRoot)==null?void 0:t.querySelector("#routerOutlet")).setRoutes([{path:"/discount-day/",animate:!0,children:[{path:"",component:"app-discount"},{path:"discount",component:"app-discount",action:async()=>{await ur(()=>Promise.resolve().then(function(){return El}),void 0)}},{path:"about",component:"app-about",action:async()=>{await ur(()=>import("./app-about.873d8360.js"),[])}},{path:"stats",component:"app-stats",action:async()=>{await ur(()=>import("./app-stats.6c0c29f0.js"),[])}}]}])}render(){return N`
+    `}constructor(){super()}firstUpdated(){var t;const e=new gt((t=this.shadowRoot)==null?void 0:t.querySelector("#routerOutlet"));console.log("/discount-day/"),e.setRoutes([{path:"/discount-day/",animate:!0,children:[{path:"",component:"app-discount"},{path:"/discount-day/discount",component:"app-discount",action:async()=>{await ur(()=>Promise.resolve().then(function(){return El}),void 0)}},{path:"/discount-day/about",component:"app-about",action:async()=>{await ur(()=>import("./app-about.37d04783.js"),[])}},{path:"/discount-day/stats",component:"app-stats",action:async()=>{await ur(()=>import("./app-stats.61ec3162.js"),[])}}]}])}render(){return N`
       <div>
         <main>
           <div id="routerOutlet"></div>
         </main>
       </div>
     `}};Lo=mc([Xt("app-index")],Lo);export{Sn as a,Xt as e,$l as g,nl as h,Lt as i,et as s,Uo as t,N as y};
-//# sourceMappingURL=index.3ee1e0a2.js.map
+//# sourceMappingURL=index.11615475.js.map
